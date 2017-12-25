@@ -7,21 +7,21 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 })
 
-nsp.on('connection', (socket) => {
-  console.log('connected');
-});
-nsp.emit('hi', 'everyone!');
-// io.on('connection', (socket) => {
-//   console.log('a user connected');
-//
-//   socket.on('chat message', (msg) => {
-//    io.emit('chat message', msg);
-//   });
-//
-//   socket.on('disconnect', () => {
-//     console.log('user disconnect');
-//   })
+// nsp.on('connection', (socket) => {
+//   console.log('connected');
 // });
+// nsp.emit('hi', 'everyone!');
+io.on('connection', (socket) => {
+  console.log('a user connected');
+
+  socket.on('chat message', (msg) => {
+   io.emit('chat message', msg);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('user disconnect');
+  })
+});
 
 
 
